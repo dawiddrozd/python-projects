@@ -4,7 +4,6 @@ import random
 
 
 class Hangman(object):
-    @property
     def secret_word(self):
         return self._secret_word
 
@@ -19,7 +18,6 @@ class Hangman(object):
         except:
             print("Unexpected error occurs")
             exit(1)
-
         try:
             self._secret_word = str(random.choice(words)).upper()
         except IndexError:
@@ -60,8 +58,8 @@ class Hangman(object):
     def guessed_word(self):
         return all(item is True for item in self._dict.values())
 
-    @classmethod
-    def is_correct(cls, char):
+    @staticmethod
+    def is_correct(char):
         return isinstance(char, str) and len(str(char)) > 0 and str(char[0]).isalpha()
 
 
@@ -69,7 +67,7 @@ nr_of_chances = 10
 if len(sys.argv) > 1:
     hangman = Hangman(chances=nr_of_chances, file=sys.argv[1])
 else:
-    print("First parameter should be an filename!")
+    print("First parameter should be a filename!")
     exit(1)
 print("Let's start game! You have {0} chances".format(nr_of_chances))
 print("Try to guess one letter")
